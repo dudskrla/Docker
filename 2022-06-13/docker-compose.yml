@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  be:
+    build:
+      context: ./
+      dockerfile: BE/Dockerfile
+    ports:
+      - '8000:8000'
+    image: be 
+    container_name: backend
+    networks: 
+      post_ocr_parsing-net: 
+        ipv4_address: 172.50.0.11 
+  fe:
+    build:
+      context: ./
+      dockerfile: FE/Dockerfile
+    ports:
+      - '8501:8501'
+    container_name: frontend
+    image: fe
+    networks: 
+      post_ocr_parsing-net: 
+        ipv4_address: 172.50.0.12
+
+networks: 
+  post_ocr_parsing-net: 
+    external: 
+      name: post_ocr_parsing
