@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  be:
+    build:
+      context: ./
+      dockerfile: BE/Dockerfile
+    ports:
+      - '8000:8000'
+    image: be 
+    container_name: backend
+    networks: 
+      - post_ocr-net
+
+  fe:
+    build:
+      context: ./
+      dockerfile: FE/Dockerfile
+    ports:
+      - '8501:8501'
+    container_name: frontend
+    image: fe
+    networks: 
+      - post_ocr-net
+
+networks:
+  post_ocr-net:
+    driver: bridge
